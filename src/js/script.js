@@ -5,7 +5,7 @@ function run() {
 
     const header = new Header(headerWrapper);
 
-    const footerWrapper = document.querySelector('.footer');
+    /* const footerWrapper = document.querySelector('.footer');
     const footerLinks = [
         {
             href: '#',
@@ -27,7 +27,7 @@ function run() {
     const footer = new Footer(footerWrapper, footerLinks);
 
     const productListWrapper = document.querySelector('.product-list');
-    const productList = new ProductList(productListWrapper);
+    const productList = new ProductList(productListWrapper); */
 }
 
 run();
