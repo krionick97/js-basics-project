@@ -71,6 +71,35 @@ const footer = new Footer(<element>, footerLinks);
 
 class Footer {
   constructor(element, links) {
+      this.element = element;
+      this.links = links;
+      const container = document.createElement('div');
+      const footerInner = document.createElement('div');
+      const footerMenu = document.createElement('div');
+      const footerCopyright = document.createElement('div');
+      container.classList.add('container');
+      footerInner.classList.add('footer-inner');
+      footerMenu.classList.add('footer-menu');
+      footerCopyright.textContent = '© 1998-2019, AnyShop.com, Inc. or its affiliates';
+
+      footerMenu.append(this.getLinkList(links));
+      footerInner.prepend(footerMenu);
+      footerInner.append(footerCopyright);
+      container.append(footerInner);
+      element.append(container);      
+
+  }
+
+  getLinkList(data) {
+      const fragment = new DocumentFragment();
+      for (const item of data) {
+          const link = document.createElement('a');
+          link.classList.add('project-link', 'text-muted');
+          link.textContent = `${item.title}`;
+          link.setAttribute('href', `${item.href}`);
+          fragment.append(link);
+      }
+      return fragment;
   }
 }
 
