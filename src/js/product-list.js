@@ -109,8 +109,83 @@ const product = {
 class ProductList {
     constructor(element){
         // ВАШ КОД
-    }
-}
+        const rowDiv = document.createElement('div');
+        rowDiv.classList.add('row', 'justify-content-end');
+        rowDiv.innerHTML = `
+            <div class="col-lg-9">
+                <h3 class="section-title">Top Recommendations for You</h3>
+                <div class="row homepage-cards">
+                    <!--ВОТ ЗДЕСЬ БУДУТ КАРТОЧКИ ТОВАРОВ-->
+                </div>
+            </div>`;
+        element.append(rowDiv);
+        const cardsPlace = document.querySelector('.homepage-cards');
+
+        const url = '../data/products.json';
+        fetch(url).then(response => response.json()).then(result => result).then(result => {
+            result.forEach(item => {
+                const cardCol = document.createElement('div');
+                const card = document.createElement('div');
+                const cardImage = document.createElement('div');
+                const cardBody = document.createElement('div');
+                const cardTitle = document.createElement('div');
+                const rate = document.createElement('div');
+                const reviewsAmount = document.createElement('span');
+                cardCol.classList.add('col-md-6', 'col-lg-4', 'mb-4');
+                card.classList.add('card');
+                cardImage.classList.add('card-img-wrap');
+                cardBody.classList.add('card-body');
+                cardTitle.classList.add('card-title');
+                rate.classList.add('rate');
+                reviewsAmount.classList.add('rate-amount', 'ml-2');
+                cardImage.innerHTML = `<img class="card-img-top" src="${item.imageUrl}" alt="Card image cap">`;
+                cardTitle.textContent = `${item.title}`;
+                let price = '';
+                let rating = {};
+                if (item.oldPrice === null) {
+                    price = `<p class="card-text price-text discount"><strong>${item.price}</strong></p>`;
+                } else {
+                    price = `<p class="card-text price-text discount"><strong>${item.price}</strong><small class="ml-2">${item.oldPrice}</small></p>`;
+                }
+                if (item.rating === null) {
+                    rating.stars = 0;
+                    rating.reviewsAmount = 0;
+                }
+                else {
+                    rating.stars = item.rating.stars;
+                    rating.reviewsAmount = item.rating.reviewsAmount;
+                }
+
+                for (let i = 0; i < 5; i++) {
+                    let icon = document.createElement('i');
+                    icon.classList.add('icon-star');
+                    if (rating.stars === 0) {
+                        icon.classList.add('active');
+                        rate.append(icon);
+                    } else {
+                        rating.stars -=1;
+                        icon.classList.add('checked');
+                        rate.append(icon);
+                    }
+                }
+                reviewsAmount.textContent = `${rating.reviewsAmount}`;
+                rate.append(reviewsAmount);
+
+                cardBody.append(cardTitle);
+                cardBody.append(rate);
+                cardBody.insertAdjacentHTML("beforeend", price);
+                card.append(cardImage);
+                card.append(cardBody);
+                cardCol.append(card);
+                cardsPlace.append(cardCol);
+                                
+            }); // result.forEach()-method
+
+            
+        }); // end of fetch (response from server)
+    } // end of constructor
+} // end of Class
+
 
 // Делает класс доступным глобально, сделано для упрощения, чтобы можно было его вызывать из другого скрипта
 window.ProductList = ProductList;

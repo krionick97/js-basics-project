@@ -26,13 +26,11 @@ function run() {
     ];
     const footer = new Footer(footerWrapper, footerLinks);
 
-    /*const productListWrapper = document.querySelector('.product-list');
+    const productListWrapper = document.querySelector('.product-list');
 
     const productList = new ProductList(productListWrapper);
 
-    const productList = new ProductList(productListWrapper);
-
-    const menuWrapper = document.querySelector('.main-menu');
+    /*const menuWrapper = document.querySelector('.main-menu');
     const menu = new Menu(menuWrapper);
 
     const carouselWrapper = document.querySelector('.carousel');

@@ -71,8 +71,6 @@ const footer = new Footer(<element>, footerLinks);
 
 class Footer {
   constructor(element, links) {
-      this.element = element;
-      this.links = links;
       const container = document.createElement('div');
       const footerInner = document.createElement('div');
       const footerMenu = document.createElement('div');

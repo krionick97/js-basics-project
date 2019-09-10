@@ -54,7 +54,6 @@
 class Header {
     // ... здесь пишете код
     constructor(el) {
-      this.el = el;
       const nav = document.createElement('nav');
       nav.classList.add('navbar', 'navbar-expand-lg', 'navbar-light');
       nav.innerHTML = `
