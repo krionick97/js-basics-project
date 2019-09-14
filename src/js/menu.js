@@ -79,6 +79,75 @@
 class Menu {
     constructor(element) {
         // Ваш код
+        this.getMenuComponent(element);
+        const dropdownItems = document.querySelectorAll('.dropdown');
+        const backdrop = document.querySelector('.backdrop');
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const sidebar = document.querySelector('.sidebar');
+
+        navbarToggler.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-display');
+        });
+
+        dropdownItems.forEach((dropdownItem) => {
+            dropdownItem.addEventListener('mouseenter', event => {
+                const dropMenu = event.target.childNodes[3];
+                dropMenu.classList.add('show');
+                backdrop.classList.add('show');
+            });
+            dropdownItem.addEventListener('mouseleave', event => {
+                const dropMenu = event.target.childNodes[3];
+                dropMenu.classList.remove('show');
+                backdrop.classList.remove('show');
+            });
+        });
+    }
+
+    getMenuComponent(component) {
+        const sidebar = document.createElement('ul');
+        sidebar.classList.add('list-group', 'sidebar');
+        sidebar.innerHTML = 
+            `<li class="list-group-item dropdown">
+                <a class="nav-link dropdown-toggle" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Camera & Photo</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown1">
+                    <li class="dropdown-item"><a>Accessories</a></li>
+                    <li class="dropdown-item"><a>Action Cameras & Accessories</a></li>
+                    <li class="dropdown-item"><a>Binoculars, Telescopes & Optics</a></li>
+                    <li class="dropdown-item"><a>Camcorders</a></li>
+                    <li class="dropdown-item"><a>Digital Cameras</a></li>
+                    <li class="dropdown-item"><a>Digital Picture Frames</a></li>
+                    <li class="dropdown-item"><a>Film Cameras</a></li>
+                    <li class="dropdown-item"><a>Film Scanners</a></li>
+                    <li class="dropdown-item"><a>Flashes</a></li>
+                    <li class="dropdown-item"><a>Lenses</a></li>
+                    <li class="dropdown-item"><a>Photo Printers</a></li>
+                    <li class="dropdown-item"><a> Slide Projectors</a></li>
+                    <li class="dropdown-item"><a>Slide Viewers</a></li>
+                    <li class="dropdown-item"><a>Surveillance Cameras</a></li>
+                    <li class="dropdown-item"><a>Tripods & Monopods</a></li>
+                    <li class="dropdown-item"><a>Underwater Video & Photography</a></li>
+                    <li class="dropdown-item"><a>Video Projectors</a></li>
+                </ul>
+            </li>
+            <li class="list-group-item dropdown">
+                <a class="nav-link dropdown-toggle" id="dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home Cinema, TV & Video</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown2">
+                    <li class="dropdown-item"><a>Home Cinema, TV & Video</a></li>
+                </ul>
+            </li>
+            <li class="list-group-item dropdown">
+                <a class="nav-link dropdown-toggle" id="dropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mobile Phones</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown3">
+                    <li class="dropdown-item"><a>Mobile Phones</a></li>
+                </ul>
+            </li>
+            <li class="list-group-item dropdown">
+                <a class="nav-link dropdown-toggle" id="dropdown4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Computers & Components</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown4">
+                    <li class="dropdown-item"><a>Computers & Components</a></li>
+                </ul>
+            </li>`;
+        component.append(sidebar);
     }
 }
 
